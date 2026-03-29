@@ -505,10 +505,17 @@ with tab4:
                 x=fp.index, y=fp.values, name='Forecast',
                 line=dict(color='crimson', width=2.5, dash='dash'),
             ))
-            fig_f.add_vline(
-                x=str(df.index[-1].date()),
-                line_dash='dot', line_color='gray',
-                annotation_text='Forecast start',
+            fig_f.add_shape(
+                type='line',
+                x0=str(df.index[-1].date()), x1=str(df.index[-1].date()),
+                y0=0, y1=1, yref='paper',
+                line=dict(dash='dot', color='gray', width=1.5),
+            )
+            fig_f.add_annotation(
+                x=str(df.index[-1].date()), y=1, yref='paper',
+                text='Forecast start', showarrow=False,
+                xanchor='left', yanchor='top',
+                font=dict(size=10, color='gray'),
             )
             fig_f.update_layout(
                 title=f'{col}: {forecast_days}-Day Forecast (XGBoost)',
